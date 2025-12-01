@@ -131,7 +131,7 @@ Proyek ini menjadi pembelajaran dalam:
 Dikembangkan oleh:
 
 - Surya Atmaja  
-  GitHub: https://github.com/suryaatmaja  
+  GitHub: https://github.com/srytmj  
 
 ---
 
