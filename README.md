@@ -10,24 +10,7 @@ Proyek ini menggunakan Laravel Breeze untuk scaffolding autentikasi dan Tailwind
 
 ---
 
-## Features
-
-- Login menggunakan email atau username
-- Register dengan pilihan role (Student, Lecture, Admin)
-- Desain UI yang simple, responsive, dan nyaman digunakan
-- Sistem ID unik (SomeID) untuk identifikasi pengguna
-- Forgot password dengan tampilan custom
-- Keamanan authentication & session management bawaan Laravel
-
----
-
 ## Instalasi 
-
-Berikut section **Installation** versi bersih tanpa emoji dan tanpa komentar tambahan:
-
----
-
-## Installation
 
 ### Clone Repository
 
@@ -115,17 +98,15 @@ Dokumentasi lengkap akan ditambahkan seiring pengembangan aplikasi.
 
 ---
 
-## Lessons Learned
+<!-- ## Lessons Learned -->
 
 Proyek ini menjadi pembelajaran dalam:
 
 - Customisasi autentikasi Laravel (LoginRequest) agar mendukung email/username
-- Membuat UI authentication yang konsisten dan modern
 - Penerapan role-based user login
-- Struktur kode yang bersih dan terorganisir
 
 ---
-
+<!-- 
 ## Authors
 
 Dikembangkan oleh:
@@ -133,7 +114,7 @@ Dikembangkan oleh:
 - Surya Atmaja  
   GitHub: https://github.com/srytmj  
 
----
+--- -->
 
 ## License
 
