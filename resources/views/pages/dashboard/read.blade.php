@@ -53,7 +53,7 @@
 
         {{-- Illustration --}}
         <div class="tw-flex tw-justify-center">
-            <img src="/images/hero.png" class="tw-w-[90%] md:tw-w-full tw-border-[2px] tw-border-white">
+            <img src="/images/hero.png" class="tw-w-[90%] md:tw-w-full tw-border-[2px]">
         </div>
 
     </section>
