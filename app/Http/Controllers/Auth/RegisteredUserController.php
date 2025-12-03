@@ -45,14 +45,6 @@
                 'password' => Hash::make($request->password),
             ]);
 
-            if ($request->role === 'student') {
-                $user->student()->create([
-
-                ]);
-            } elseif ($request->role === 'lecture') {
-                $user->lecture()->create();
-            } 
-
             event(new Registered($user));
 
             Auth::login($user);

@@ -6,6 +6,7 @@ use App\Models\Lecture;
 use App\Models\Course;
 use App\Models\CourseSchedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
 {

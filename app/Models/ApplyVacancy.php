@@ -9,9 +9,7 @@ class ApplyVacancy extends Model
 {
     protected $table = 'apply_vacancy';
 
-    protected $fillable = [
-        'vacancy_id', 'student_id', 'status', 'transcript', 'cv'
-    ];
+    protected $guarded = [];
 
     public function vacancy() {
         return $this->belongsTo(Vacancy::class);

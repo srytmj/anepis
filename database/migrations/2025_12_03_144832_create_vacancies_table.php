@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('vacancy', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_id')->constrained('course')->onDelete('cascade');
+            $table->unsignedBigInteger('course_id')->constrained('course')->onDelete('cascade');
             $table->integer('quota');
             $table->string('status_vac')->default('open'); // open / closed
             $table->date('close_date');
-            $table->string('durasi')->nullable();
+            $table->string('duration')->nullable();
             $table->text('description')->nullable();
             $table->text('requirement')->nullable();
             $table->text('benefit')->nullable();
@@ -26,11 +26,11 @@ return new class extends Migration
 
         Schema::create('apply_vacancy', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('vacancy_id')->constrained()->onDelete('cascade');
-            $table->foreignId('student_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('vacancy_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('student_id')->constrained()->onDelete('cascade');
             $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
-            $table->string('transcript')->nullable(); // file path
-            $table->string('cv')->nullable();        // file path
+            // $table->string('transcript')->nullable(); // file path
+            // $table->string('cv')->nullable();        // file path
             $table->timestamps();
         });
 

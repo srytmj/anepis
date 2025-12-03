@@ -94,30 +94,4 @@ class VacancyController extends Controller
         $vacancy->delete();
         return redirect()->route('vacancy.index')->with('success', 'Vacancy deleted.');
     }
-
-    public function apply(Vacancy $vacancy)
-    {
-        $student = Auth::user()->student;
-
-        if (!$student) {
-            return redirect()->back()->with('error', 'Akun Anda tidak terdaftar sebagai student.');
-        }
-
-        // cek apply
-        $alreadyApplied = ApplyVacancy::where('vacancy_id', $vacancy->id)
-            ->where('student_id', $student->id)
-            ->exists();
-
-        if ($alreadyApplied) {
-            return redirect()->back()->with('info', 'Anda sudah apply lowongan ini.');
-        }
-
-        ApplyVacancy::create([
-            'vacancy_id' => $vacancy->id,
-            'student_id' => $student->id,
-            'status' => 'applied',
-        ]);
-
-        return redirect()->back()->with('success', 'Berhasil apply lowongan!');
-    }
 }

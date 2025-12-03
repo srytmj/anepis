@@ -11,9 +11,8 @@
         <ul class="tw-hidden md:tw-flex tw-gap-8 tw-font-medium tw-items-center">
 
             @auth
-
                 {{-- Menu Mahasiswa --}}
-                @if (auth()->user()->role === 'mahasiswa')
+                @if (auth()->user()->role === 'student')
                     <li><a href="#" class="hover:tw-text-red-600 tw-transition">Status Asprak</a></li>
                 @endif
 
@@ -34,10 +33,14 @@
 
                         <ul x-show="open" @click.outside="open = false" x-transition
                             class="tw-absolute tw-left-0 tw-mt-2 tw-bg-white tw-rounded-md tw-shadow-md tw-min-w-[160px] tw-py-2 tw-z-50">
-                            <li><a href="{{ route('lecture.index') }}" class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100">Data Dosen</a></li>
-                            <li><a href="{{ route('course.index') }}" class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100">Data Mata Kuliah</a></li>
-                            <li><a href="{{ route('student.index') }}" class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100">Data Asprak</a></li>
-                            <li><a href="{{ route('vacancy.index') }}" class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100">Data Lowongan</a></li>
+                            <li><a href="{{ route('lecture.index') }}"
+                                    class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100">Data Dosen</a></li>
+                            <li><a href="{{ route('course.index') }}"
+                                    class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100">Data Mata Kuliah</a></li>
+                            <li><a href="{{ route('student.index') }}"
+                                    class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100">Data Asprak</a></li>
+                            <li><a href="{{ route('vacancy.index') }}"
+                                    class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100">Data Lowongan</a></li>
                         </ul>
                     </li>
                 @endif
@@ -49,31 +52,24 @@
 
         {{-- User Menu Desktop --}}
         <div class="tw-hidden md:tw-flex tw-items-center tw-gap-4 tw-relative" x-data="{ userOpen: false }">
-
             <button @click="userOpen = !userOpen"
                 class="tw-flex tw-items-center tw-gap-2 tw-text-red-600 tw-font-semibold hover:tw-text-red-700 tw-transition">
                 <i class="fa-solid fa-user"></i>
-                <span>{{ auth()->user()->name }} ({{ auth()->user()->role }})</span>
+                <span>{{ $displayName }} ({{ $fullName }})</span>
                 <i class="fa-solid fa-caret-down"></i>
             </button>
 
-            {{-- Dropdown --}}
             <ul x-show="userOpen" @click.outside="userOpen = false" x-transition
-                class="tw-absolute tw-right-0 tw-top-full tw-mt-2 tw-bg-white tw-rounded-md tw-shadow-md tw-min-w-[170px] tw-z-50 tw-py-2">
-                <li><a href="#" class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100">Account Settings</a></li>
-
+                class="tw-absolute tw-right-0 tw-mt-2 tw-bg-white tw-rounded-md tw-shadow-md tw-min-w-[160px] tw-py-2 tw-z-50">
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button class="tw-w-full tw-text-left tw-px-4 tw-py-2 hover:tw-bg-gray-100">
-                            Logout
-                        </button>
+                        <button type="submit"
+                            class="tw-w-full tw-text-left tw-px-4 tw-py-2 hover:tw-bg-gray-100">Logout</button>
                     </form>
                 </li>
             </ul>
-
         </div>
-
 
         {{-- Mobile Toggle --}}
         <button @click="mobileOpen = !mobileOpen" class="md:tw-hidden tw-text-red-600">
@@ -89,7 +85,7 @@
 
             @auth
 
-                @if (auth()->user()->role === 'mahasiswa')
+                @if (auth()->user()->role === 'student')
                     <li><a href="#" class="hover:tw-text-red-600">Status Asprak</a></li>
                 @endif
 

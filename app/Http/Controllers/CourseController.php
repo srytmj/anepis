@@ -71,6 +71,7 @@ class CourseController extends Controller
         $course = Course::create([
             'course_code' => $request->course_code,
             'course_name' => $request->course_name,
+            'major'=> $request->major,
         ]);
 
         // attach lecturers

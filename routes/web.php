@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\VacancyController;
+use App\Http\Controllers\ApplyVacancyController;
 
 Route::get('/', function () {
     return view('pages.dashboard.read');
@@ -28,7 +29,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('student', App\Http\Controllers\StudentController::class);
     Route::resource('vacancy', App\Http\Controllers\VacancyController::class);
     Route::get('/vacancy/{vacancy}', [VacancyController::class, 'show'])->name('vacancy.show');
-
 });
 
 // lecturers
@@ -42,6 +42,6 @@ Route::get('/courses', [ApiController::class, 'courses']);
 Route::get('/courses/{id}/schedules', [ApiController::class, 'courseSchedule']);
 Route::get('/lecture/search', [ApiController::class, 'searchLec']);
 
-Route::post('/vacancy/{vacancy}/apply', [VacancyController::class, 'apply'])->name('vacancy.apply')->middleware('auth');
+Route::post('/vacancy/apply', [ApplyVacancyController::class, 'store'])->name('vacancy.apply.store')->middleware('auth');
 
 require __DIR__.'/auth.php';

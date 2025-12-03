@@ -34,8 +34,8 @@
                         class="tw-block tw-w-full tw-mt-1 tw-rounded-full tw-border tw-border-gray-300 tw-text-sm tw-py-3 tw-px-4 
                                focus:tw-border-[#bd0000] focus:tw-ring-[#bd0000]">
                         <option disabled selected role="alert">Pilih Role</option>
-                        <option value="mahasiswa">Mahasiswa</option>
-                        <option value="dosen">Dosen</option>
+                        <option value="student">Mahasiswa</option>
+                        <option value="lecture">Dosen</option>
                         <option value="admin">Admin</option>
                     </select>
                     <x-input-error :messages="$errors->get('role')" class="tw-text-red-500 tw-text-xs tw-mt-1" />
