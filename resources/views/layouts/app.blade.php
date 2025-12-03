@@ -8,51 +8,71 @@
 
     {{-- Fonts --}}
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700,800" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700,800" rel="stylesheet">
 
-    {{-- Vite CSS & JS --}}
+    {{-- Bootstrap --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    {{-- Tailwind (Vite) – harus dipasang setelah Bootstrap --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    {{-- Bootstrap JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        /* ==== COMPACT DATATABLE ==== */
+        table.dataTable thead th {
+            padding: 6px 8px !important;
+            font-size: 13px !important;
+            white-space: nowrap;
+        }
+
+        table.dataTable tbody td {
+            padding: 6px 8px !important;
+            font-size: 13px !important;
+        }
+
+        table.dataTable {
+            width: 100% !important;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            height: 32px !important;
+            font-size: 13px !important;
+        }
+
+        .dataTables_wrapper .dataTables_length select {
+            height: 32px !important;
+            font-size: 13px !important;
+        }
+
+        .dataTables_wrapper {
+            margin-top: 0 !important;
+        }
+    </style>
+
 </head>
-<script>
-    const navToggle = document.getElementById('navToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
 
-    navToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('tw-hidden');
-    });
-</script>
+<body class="tw-bg-gray-50 tw-font-inter tw-min-h-screen tw-flex tw-flex-col">
 
-<body class="tw-bg-gray-50 tw-font-inter">
-
-    {{-- ======== NAVBAR (sementara) ======== --}}
-    <x-navbar />
-    {{-- <nav class="tw-bg-white tw-shadow-sm tw-py-3">
-        <div class="tw-container tw-mx-auto tw-flex tw-items-center tw-justify-between tw-px-4">
-
-            <a href="/" class="tw-text-2xl tw-font-bold tw-text-red-600">
-                Sipena
-            </a>
-
-            <div class="tw-flex tw-items-center tw-gap-3">
-                <p class="tw-font-medium tw-text-gray-700">Hi, User</p>
-                <img src="/images/people.png" class="tw-h-10 tw-w-10 tw-rounded-full tw-object-cover">
-            </div>
-        </div>
-    </nav> --}}
-
+    {{-- ======== NAVBAR ======== --}}
+    <header class="tw-w-full tw-z-50">
+        <x-navbar />
+    </header>
 
     {{-- ======== MAIN PAGE CONTENT ======== --}}
-    <main class="tw-min-h-screen">
+    <main class="tw-flex-1 tw-py-6 tw-px-4 md:tw-px-8 tw-mt-4">
         @yield('content')
     </main>
 
+    {{-- ======== FOOTER ======== --}}
+    <footer class="tw-w-full tw-bg-white tw-shadow-inner tw-py-4 tw-mt-4">
+        <x-footer />
+    </footer>
 
-    {{-- ======== FOOTER (optional) ======== --}}
-    <x-footer />
-    {{-- <footer class="tw-text-center tw-text-gray-600 tw-text-sm tw-py-5 tw-border-t tw-mt-20">
-        &copy; {{ date('Y') }} Sipena • Sistem Informasi Penerimaan Asisten Praktikum
-    </footer> --}}
+    <script>
+        window.HSSelect?.init();
+    </script>
 
 </body>
 

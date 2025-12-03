@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -53,6 +52,21 @@ return new class extends Migration
             'password' => bcrypt('12341234'), // Default password
             'role' => 'lecture', // lecture role
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'Lecture 1',
+            'email' => 'lecture1@mail.com',
+            'password' => bcrypt('12341234'), // Default password
+            'role' => 'lecture', // lecture role
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Lecture 2',
+            'email' => 'lecture2@mail.com',
+            'password' => bcrypt('12341234'), // Default password
+            'role' => 'lecture', // lecture role
+        ]);
+        
         // insert default student (inserted into users table)
         DB::table('users')->insert([
             'name' => 'Student',
@@ -61,10 +75,6 @@ return new class extends Migration
             'role' => 'student', // student role
         ]);
     }
-
-     
-
-
 
     /**
      * Reverse the migrations.

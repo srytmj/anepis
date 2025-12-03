@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
+use App\Http\Controllers\VacancyController;
 
 Route::get('/', function () {
     return view('pages.dashboard.read');
@@ -20,5 +22,26 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::resource('course', App\Http\Controllers\CourseController::class);
+    Route::resource('lecture', App\Http\Controllers\LectureController::class);
+    Route::resource('student', App\Http\Controllers\StudentController::class);
+    Route::resource('vacancy', App\Http\Controllers\VacancyController::class);
+    Route::get('/vacancy/{vacancy}', [VacancyController::class, 'show'])->name('vacancy.show');
+
+});
+
+// lecturers
+Route::get('/lecturers', [ApiController::class, 'lecturers']);
+Route::get('/lecturers/search', [ApiController::class, 'searchLecturers']);
+
+// courses
+Route::get('/courses', [ApiController::class, 'courses']);
+
+// schedule
+Route::get('/courses/{id}/schedules', [ApiController::class, 'courseSchedule']);
+Route::get('/lecture/search', [ApiController::class, 'searchLec']);
+
+Route::post('/vacancy/{vacancy}/apply', [VacancyController::class, 'apply'])->name('vacancy.apply')->middleware('auth');
 
 require __DIR__.'/auth.php';

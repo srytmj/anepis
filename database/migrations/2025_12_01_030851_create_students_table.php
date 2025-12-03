@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+// import db facade
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -12,7 +14,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('student', function (Blueprint $table) {
-            $table->id('studentid');
+            $table->id();
+            $table->integer('studentid')->unique();
             $table->string('email')->unique();
             $table->string('name');
             $table->string('transcript')->nullable();

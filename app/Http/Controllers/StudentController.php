@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\student;
 use App\Http\Requests\StorestudentRequest;
 use App\Http\Requests\UpdatestudentRequest;
+use Illuminate\Support\Facades\Storage;
+
 
 class StudentController extends Controller
 {
@@ -13,7 +15,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::latest()->paginate(10);
+        return view('student.index', compact('students'));
     }
 
     /**
@@ -21,7 +24,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('student.create');
     }
 
     /**
@@ -29,7 +32,27 @@ class StudentController extends Controller
      */
     public function store(StorestudentRequest $request)
     {
-        //
+        $data = $request->validate([
+            'studentid' => 'required|integer|unique:student,studentid',
+            'email' => 'required|email|unique:student,email',
+            'name' => 'required|string|max:255',
+            'phonenumber' => 'nullable|string|max:20',
+            'transcript' => 'nullable|file|mimes:pdf',
+            'profilephoto' => 'nullable|image|max:2048',
+        ]);
+
+        // Upload files
+        if ($request->hasFile('transcript')) {
+            $data['transcript'] = $request->file('transcript')->store('transcripts', 'public');
+        }
+
+        if ($request->hasFile('profilephoto')) {
+            $data['profilephoto'] = $request->file('profilephoto')->store('profilephotos', 'public');
+        }
+
+        Student::create($data);
+
+        return redirect()->route('student.index')->with('success', 'Student created successfully.');
     }
 
     /**
@@ -45,7 +68,7 @@ class StudentController extends Controller
      */
     public function edit(student $student)
     {
-        //
+        return view('student.edit', compact('student'));
     }
 
     /**
@@ -53,7 +76,33 @@ class StudentController extends Controller
      */
     public function update(UpdatestudentRequest $request, student $student)
     {
-        //
+        $data = $request->validate([
+            'studentid' => 'required|integer|unique:student,studentid,' . $student->id,
+            'email' => 'required|email|unique:student,email,' . $student->id,
+            'name' => 'required|string|max:255',
+            'phonenumber' => 'nullable|string|max:20',
+            'transcript' => 'nullable|file|mimes:pdf',
+            'profilephoto' => 'nullable|image|max:2048',
+        ]);
+
+        // Upload files
+        if ($request->hasFile('transcript')) {
+            if ($student->transcript) {
+                Storage::disk('public')->delete($student->transcript);
+            }
+            $data['transcript'] = $request->file('transcript')->store('transcripts', 'public');
+        }
+
+        if ($request->hasFile('profilephoto')) {
+            if ($student->profilephoto) {
+                Storage::disk('public')->delete($student->profilephoto);
+            }
+            $data['profilephoto'] = $request->file('profilephoto')->store('profilephotos', 'public');
+        }
+
+        $student->update($data);
+
+        return redirect()->route('student.index')->with('success', 'Student updated successfully.');
     }
 
     /**
@@ -61,6 +110,15 @@ class StudentController extends Controller
      */
     public function destroy(student $student)
     {
-        //
+        if ($student->transcript) {
+            Storage::disk('public')->delete($student->transcript);
+        }
+        if ($student->profilephoto) {
+            Storage::disk('public')->delete($student->profilephoto);
+        }
+
+        $student->delete();
+
+        return redirect()->route('student.index')->with('success', 'Student deleted successfully.');
     }
 }

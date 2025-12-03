@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Course;
 
-class lecture extends Model
+class Lecture extends Model
 {
     /** @use HasFactory<\Database\Factories\LectureFactory> */
     use HasFactory;
@@ -13,4 +14,10 @@ class lecture extends Model
     protected $table = 'lecture';
 
     protected $guarded = [];
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'course_lecturer', 'lecture_id', 'course_id');
+    }
+
 }

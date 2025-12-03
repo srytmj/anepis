@@ -13,7 +13,8 @@ class LectureController extends Controller
      */
     public function index()
     {
-        //
+        $lectures = Lecture::all();
+        return view('lecture.index', compact('lectures'));
     }
 
     /**
@@ -21,7 +22,7 @@ class LectureController extends Controller
      */
     public function create()
     {
-        //
+        return view('lecture.create');
     }
 
     /**
@@ -29,7 +30,13 @@ class LectureController extends Controller
      */
     public function store(StorelectureRequest $request)
     {
-        //
+        $request->validate([
+            'nidn' => 'required|string|max:50|unique:lecture,nidn,' . ($lecture->id ?? ''),
+            'name' => 'required|string|max:255',
+        ]);
+        
+        Lecture::create($request->all());
+        return redirect()->route('lecture.index')->with('success', 'Dosen berhasil ditambahkan.');
     }
 
     /**
@@ -45,7 +52,7 @@ class LectureController extends Controller
      */
     public function edit(lecture $lecture)
     {
-        //
+        return view('lecture.edit', compact('lecture'));
     }
 
     /**
@@ -53,7 +60,13 @@ class LectureController extends Controller
      */
     public function update(UpdatelectureRequest $request, lecture $lecture)
     {
-        //
+        $request->validate([
+            'nidn' => 'required|string|max:50|unique:lecture,nidn,' . ($lecture->id ?? ''),
+            'name' => 'required|string|max:255',
+        ]);
+
+        $lecture->update($request->all());
+        return redirect()->route('lecture.index')->with('success', 'Dosen berhasil diperbarui.');
     }
 
     /**
@@ -61,6 +74,7 @@ class LectureController extends Controller
      */
     public function destroy(lecture $lecture)
     {
-        //
+        $lecture->delete();
+        return redirect()->route('lecture.index')->with('success', 'Dosen berhasil dihapus.');
     }
 }
