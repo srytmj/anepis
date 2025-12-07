@@ -1,10 +1,17 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
-use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\ApplyVacancyController;
+use App\Http\Controllers\AsprakDashboardController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LectureController;
+// use course controller
+use App\Http\Controllers\ProfileController;
+// use lecture controller
+use App\Http\Controllers\StudentController;
+// use student controller
+use App\Http\Controllers\VacancyController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.dashboard.read');
@@ -24,11 +31,28 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('course', App\Http\Controllers\CourseController::class);
-    Route::resource('lecture', App\Http\Controllers\LectureController::class);
-    Route::resource('student', App\Http\Controllers\StudentController::class);
-    Route::resource('vacancy', App\Http\Controllers\VacancyController::class);
+    Route::resource('course', CourseController::class);
+    Route::resource('lecture', LectureController::class);
+    Route::resource('student', StudentController::class);
+    Route::resource('vacancy', VacancyController::class);
     Route::get('/vacancy/{vacancy}', [VacancyController::class, 'show'])->name('vacancy.show');
+
+    // Cek apakah user adalah student sebelum masuk dashboard
+    // Route::resource('asprak', AsprakDashboardController::class);
+    Route::get('/asprak/dashboard', function () {
+        if (Auth::user()->role !== 'student') {
+            abort(403, 'Unauthorized action.'); // Atau return redirect('/')
+        }
+
+        return app(AsprakDashboardController::class)->index();
+    })->name('asprak.dashboard');
+
+    // Route untuk submit jadwal (Post)
+    Route::post('/asprak/schedule', [AsprakDashboardController::class, 'storeSchedule'])
+        ->name('asprak.schedule.store');
+
+    Route::delete('/asprak/schedule/{id}', [AsprakDashboardController::class, 'destroySchedule'])
+        ->name('asprak.schedule.destroy');
 });
 
 // lecturers
@@ -43,5 +67,8 @@ Route::get('/courses/{id}/schedules', [ApiController::class, 'courseSchedule']);
 Route::get('/lecture/search', [ApiController::class, 'searchLec']);
 
 Route::post('/vacancy/apply', [ApplyVacancyController::class, 'store'])->name('vacancy.apply.store')->middleware('auth');
+
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 require __DIR__.'/auth.php';

@@ -17,6 +17,10 @@ class VacancyController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->role !== 'admin') {
+            abort(404);
+        }
+
         $vacancies = Vacancy::with('course')->latest()->get();
         return view('vacancy.index', compact('vacancies'));
     }

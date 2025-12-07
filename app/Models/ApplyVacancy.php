@@ -11,11 +11,14 @@ class ApplyVacancy extends Model
 
     protected $guarded = [];
 
-    public function vacancy() {
+    public function vacancy()
+    {
         return $this->belongsTo(Vacancy::class);
     }
 
-    public function student() {
+    public function student()
+    {
         return $this->belongsTo(Student::class);
     }
+
 }

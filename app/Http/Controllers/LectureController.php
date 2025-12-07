@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\lecture;
 use App\Http\Requests\StorelectureRequest;
 use App\Http\Requests\UpdatelectureRequest;
+use Illuminate\Support\Facades\Auth;
 
 class LectureController extends Controller
 {
@@ -13,6 +14,10 @@ class LectureController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->role !== 'admin') {
+            abort(404);
+        }
+
         $lectures = Lecture::all();
         return view('lecture.index', compact('lectures'));
     }
@@ -34,7 +39,7 @@ class LectureController extends Controller
             'nidn' => 'required|string|max:50|unique:lecture,nidn,' . ($lecture->id ?? ''),
             'name' => 'required|string|max:255',
         ]);
-        
+
         Lecture::create($request->all());
         return redirect()->route('lecture.index')->with('success', 'Dosen berhasil ditambahkan.');
     }

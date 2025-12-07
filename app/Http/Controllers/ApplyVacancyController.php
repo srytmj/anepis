@@ -65,8 +65,8 @@ class ApplyVacancyController extends Controller
             // 'applied_at' => now(), // optional
         ]);
 
-        // return redirect()->back()->with('success', 'Berhasil apply lowongan!');
-        return response()->json([$student, $vacancyId]);
+        return redirect()->back()->with('success', 'Berhasil apply lowongan!');
+        // return response()->json([$student, $vacancyId]);
     }
 
     /**

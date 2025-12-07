@@ -13,9 +13,13 @@
             @auth
                 {{-- Menu Mahasiswa --}}
                 @if (auth()->user()->role === 'student')
-                    <li><a href="#" class="hover:tw-text-red-600 tw-transition">Status Asprak</a></li>
+                    <li>
+                        {{-- Ganti href="#" dengan route() --}}
+                        <a href="{{ route('asprak.dashboard') }}" class="hover:tw-text-red-600 tw-transition">
+                            Status Asprak
+                        </a>
+                    </li>
                 @endif
-
                 {{-- Menu Dosen --}}
                 @if (auth()->user()->role === 'lecture')
                     <li><a href="#" class="hover:tw-text-red-600 tw-transition">Lihat Pengajuan</a></li>
@@ -32,7 +36,7 @@
                         </button>
 
                         <ul x-show="open" @click.outside="open = false" x-transition
-                            class="tw-absolute tw-left-0 tw-mt-2 tw-bg-white tw-rounded-md tw-shadow-md tw-min-w-[160px] tw-py-2 tw-z-50">
+                            class="tw-absolute tw-top-full tw-right-0 tw-mt-2 tw-bg-white tw-rounded-md tw-shadow-md tw-min-w-[160px] tw-py-2 tw-z-50">
                             <li><a href="{{ route('lecture.index') }}"
                                     class="tw-block tw-px-4 tw-py-2 hover:tw-bg-gray-100">Data Dosen</a></li>
                             <li><a href="{{ route('course.index') }}"
@@ -60,16 +64,32 @@
             </button>
 
             <ul x-show="userOpen" @click.outside="userOpen = false" x-transition
-                class="tw-absolute tw-right-0 tw-mt-2 tw-bg-white tw-rounded-md tw-shadow-md tw-min-w-[160px] tw-py-2 tw-z-50">
+                class="tw-absolute tw-top-full tw-right-0 tw-mt-2
+               tw-bg-white tw-rounded-md tw-shadow-md tw-min-w-[180px]
+               tw-border tw-border-gray-200
+               tw-overflow-hidden tw-z-[999]">
+
+                <li>
+                    <a href="{{ route('profile') }}" class="tw-block tw-px-4 tw-py-2 tw-text-sm hover:tw-bg-gray-100">
+                        My Profile
+                    </a>
+                </li>
+
+                <li class="tw-border-t tw-border-gray-200"></li>
+
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit"
-                            class="tw-w-full tw-text-left tw-px-4 tw-py-2 hover:tw-bg-gray-100">Logout</button>
+                            class="tw-w-full tw-text-left tw-text-sm tw-px-4 tw-py-2 hover:tw-bg-gray-100">
+                            Logout
+                        </button>
                     </form>
                 </li>
+
             </ul>
         </div>
+
 
         {{-- Mobile Toggle --}}
         <button @click="mobileOpen = !mobileOpen" class="md:tw-hidden tw-text-red-600">

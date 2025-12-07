@@ -6,6 +6,7 @@ use App\Models\student;
 use App\Http\Requests\StorestudentRequest;
 use App\Http\Requests\UpdatestudentRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 
 class StudentController extends Controller
@@ -15,6 +16,10 @@ class StudentController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->role !== 'admin') {
+            abort(404);
+        }
+
         $students = Student::latest()->paginate(10);
         return view('student.index', compact('students'));
     }
