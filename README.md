@@ -56,6 +56,11 @@ DB_PASSWORD=
 php artisan migrate
 ```
 
+### Link folder storage
+```bash
+php artisan storage:link
+```
+
 ### Build Frontend
 
 ```bash
