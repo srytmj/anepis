@@ -17,13 +17,13 @@
             <thead class="tw-bg-gray-100 tw-text-gray-700">
                 <tr>
                     <th class="tw-border tw-p-2">No</th>
-                    <th class="tw-border tw-p-2">Student ID</th>
+                    <th class="tw-border tw-p-2">NIM</th>
                     <th class="tw-border tw-p-2">Nama</th>
                     <th class="tw-border tw-p-2">Email</th>
-                    <th class="tw-border tw-p-2">Phone</th>
-                    <th class="tw-border tw-p-2">Transcript</th>
-                    <th class="tw-border tw-p-2">Photo</th>
-                    <th class="tw-border tw-p-2" width="150px">Action</th>
+                    <th class="tw-border tw-p-2">No. Telp</th>
+                    <th class="tw-border tw-p-2">Transkrip</th>
+                    <th class="tw-border tw-p-2">Foto</th>
+                    <th class="tw-border tw-p-2" width="150px">Aksi</th>
                 </tr>
             </thead>
 
@@ -37,7 +37,7 @@
                     <td class="tw-border tw-p-2">{{ $student->phonenumber ?? '-' }}</td>
                     <td class="tw-border tw-p-2">
                         @if($student->transcript)
-                            <a href="{{ asset('storage/' . $student->transcript) }}" target="_blank" class="tw-text-blue-500">View</a>
+                            <a href="{{ asset('storage/' . $student->transcript) }}" target="_blank" class="tw-text-blue-500">Download File</a>
                         @else
                             -
                         @endif
@@ -53,7 +53,7 @@
                         <div class="tw-flex tw-gap-2 tw-items-center">
                             <a href="{{ route('student.edit', $student->id) }}"
                                 class="tw-bg-yellow-500 tw-text-white tw-text-sm tw-px-3 tw-py-1 tw-rounded hover:tw-bg-yellow-600">
-                                Edit
+                                Ubah
                             </a>
 
                             <form action="{{ route('student.destroy', $student->id) }}" method="POST"
@@ -61,7 +61,7 @@
                                 @csrf @method('DELETE')
                                 <button
                                     class="tw-bg-red-500 tw-text-white tw-text-sm tw-px-3 tw-py-1 tw-rounded hover:tw-bg-red-600">
-                                    Delete
+                                    Hapus
                                 </button>
                             </form>
                         </div>

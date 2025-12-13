@@ -33,7 +33,7 @@
                         <div class="tw-flex tw-gap-2 tw-items-center">
                             <a href="{{ route('lecture.edit', $lecture->id) }}"
                                 class="tw-bg-yellow-500 tw-text-white tw-text-sm tw-px-3 tw-py-1 tw-rounded hover:tw-bg-yellow-600">
-                                Edit
+                                Ubah
                             </a>
 
                             <form action="{{ route('lecture.destroy', $lecture->id) }}" method="POST"
@@ -41,7 +41,7 @@
                                 @csrf @method('DELETE')
                                 <button
                                     class="tw-bg-red-500 tw-text-white tw-text-sm tw-px-3 tw-py-1 tw-rounded hover:tw-bg-red-600">
-                                    Delete
+                                    Hapus
                                 </button>
                             </form>
                         </div>

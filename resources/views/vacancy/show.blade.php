@@ -134,10 +134,10 @@
                 <p class="tw-text-gray-700 tw-whitespace-pre-line">{{ $vacancy->requirement ?? '-' }}</p>
             </div>
 
-            <div>
+            <!-- <div>
                 <h3 class="tw-font-semibold tw-mb-2">Benefit</h3>
                 <p class="tw-text-gray-700 tw-whitespace-pre-line">{{ $vacancy->benefit ?? '-' }}</p>
-            </div>
+            </div> -->
 
         </div>
     </div>

@@ -34,47 +34,42 @@
             @if ($user->role === 'student')
                 <hr class="tw-my-6">
 
-                <h3 class="tw-text-lg tw-font-semibold tw-mb-3">Student Information</h3>
+                <h3 class="tw-text-lg tw-font-semibold tw-mb-3">Informasi Mahasiswa</h3>
 
                 {{-- STUDENT ID --}}
                 <div class="tw-mb-4">
-                    <label class="tw-font-medium">Student ID</label>
+                    <label class="tw-font-medium">NIM</label>
                     <input type="text" class="tw-w-full tw-border tw-rounded tw-p-2 bg-gray-100"
                         value="{{ $user->student->studentid }}" readonly>
                 </div>
 
                 {{-- PHONE NUMBER --}}
                 <div class="tw-mb-4">
-                    <label class="tw-font-medium">Phone Number</label>
+                    <label class="tw-font-medium">Nomor Telepon</label>
                     <input type="text" name="phonenumber" class="tw-w-full tw-border tw-rounded tw-p-2"
                         value="{{ old('phonenumber', $user->student->phonenumber) }}">
                 </div>
 
                 {{-- TRANSCRIPT (FILE) --}}
-                <div class="tw-mb-4">
-                    <label class="tw-font-medium">Transcript (PDF/DOC)</label><br>
-                    <input type="file" name="transcript" class="tw-mt-2">
 
-                    @if ($user->student->transcript)
-                        <p class="tw-mt-2">
-                            Current: <a href="{{ asset('storage/' . $user->student->transcript) }}" target="_blank"
-                                class="tw-text-blue-600">View File</a>
-                        </p>
+                <div class="tw-mb-4">
+                    <label class="tw-block tw-font-semibold tw-mb-1">Transkrip (PDF)</label>
+                    <input type="file" name="transcript" accept="application/pdf" class="tw-w-full tw-border tw-p-2 tw-rounded">
+                    @if(isset($user) && $user->student->transcript)
+                        <a href="{{ asset('storage/' . $user->student->transcript) }}" target="_blank"
+                            class="tw-text-blue-500 tw-text-sm">View current transcript</a>
                     @endif
                 </div>
 
-                {{-- PROFILE PHOTO --}}
                 <div class="tw-mb-4">
-                    <label class="tw-font-medium">Profile Photo</label><br>
-                    <input type="file" name="profilephoto" class="tw-mt-2">
-
-                    @if ($user->student->profilephoto)
-                        <div class="tw-mt-3">
-                            <img src="{{ asset('storage/' . $user->student->profilephoto) }}"
-                                class="tw-w-32 tw-h-32 tw-rounded-full tw-object-cover">
-                        </div>
+                    <label class="tw-block tw-font-semibold tw-mb-1">Foto Profil (Image)</label>
+                    <input type="file" name="profilephoto" accept="image/*" class="tw-w-full tw-border tw-p-2 tw-rounded">
+                    @if(isset($user) && $user->student->profilephoto)
+                        <img src="{{ asset('storage/' . $user->student->profilephoto) }}" class="tw-h-20 tw-w-20 tw-rounded-full tw-mt-2"
+                            alt="Profile Photo">
                     @endif
                 </div>
+
             @endif
 
 
@@ -82,7 +77,7 @@
             @if ($user->role === 'lecture' && $user->lecture)
                 <hr class="tw-my-6">
 
-                <h3 class="tw-text-lg tw-font-semibold tw-mb-3">Lecture Information</h3>
+                <h3 class="tw-text-lg tw-font-semibold tw-mb-3">Informasi Dosen</h3>
 
                 {{-- NIDN --}}
                 <div class="tw-mb-4">

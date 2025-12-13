@@ -73,14 +73,14 @@
             @enderror
         </div>
 
-        {{-- Benefit --}}
+        <!-- {{-- Benefit --}}
         <div class="tw-mb-4">
             <label class="tw-block tw-mb-2">Benefit</label>
             <textarea name="benefit" class="tw-w-full tw-border tw-p-2 tw-rounded @error('benefit') tw-border-red-500 @enderror" rows="3">{{ $vacancy->benefit }}</textarea>
             @error('benefit')
                 <p class="tw-text-red-500 tw-text-sm tw-mt-1">{{ $message }}</p>
             @enderror
-        </div>
+        </div> -->
 
         {{-- Durasi --}}
         <div class="tw-mb-4">

@@ -10,9 +10,9 @@
 
         {{-- Course --}}
         <div class="tw-mb-4">
-            <label class="tw-block tw-mb-2">Course</label>
+            <label class="tw-block tw-mb-2">Mata Kuliah</label>
             <select name="course_id" class="tw-w-full tw-border tw-p-2 tw-rounded @error('course_id') tw-border-red-500 @enderror" required>
-                <option value="">Pilih Course</option>
+                <option value="">Pilih Mata Kuliah</option>
                 @foreach($courses as $course)
                     <option value="{{ $course->id }}" {{ old('course_id') == $course->id ? 'selected' : '' }}>
                         {{ $course->course_name }}
@@ -26,7 +26,7 @@
 
         {{-- Quota --}}
         <div class="tw-mb-4">
-            <label class="tw-block tw-mb-2">Quota</label>
+            <label class="tw-block tw-mb-2">Kuota</label>
             <input type="number" name="quota" value="{{ old('quota') }}" class="tw-w-full tw-border tw-p-2 tw-rounded @error('quota') tw-border-red-500 @enderror" required>
             @error('quota')
                 <p class="tw-text-red-500 tw-text-sm tw-mt-1">{{ $message }}</p>
@@ -37,8 +37,8 @@
         <div class="tw-mb-4">
             <label class="tw-block tw-mb-2">Status</label>
             <select name="status_vac" class="tw-w-full tw-border tw-p-2 tw-rounded @error('status_vac') tw-border-red-500 @enderror" required>
-                <option value="open" {{ old('status_vac')=='open'?'selected':'' }}>Open</option>
-                <option value="closed" {{ old('status_vac')=='closed'?'selected':'' }}>Closed</option>
+                <option value="open" {{ old('status_vac')=='open'?'selected':'' }}>Buka</option>
+                <option value="closed" {{ old('status_vac')=='closed'?'selected':'' }}>Tutup</option>
             </select>
             @error('status_vac')
                 <p class="tw-text-red-500 tw-text-sm tw-mt-1">{{ $message }}</p>
@@ -47,7 +47,7 @@
 
         {{-- Close Date --}}
         <div class="tw-mb-4">
-            <label class="tw-block tw-mb-2">Close Date</label>
+            <label class="tw-block tw-mb-2">Tanggal Penutupan</label>
             <input type="date" name="close_date" value="{{ old('close_date') }}" class="tw-w-full tw-border tw-p-2 tw-rounded @error('close_date') tw-border-red-500 @enderror" required>
             @error('close_date')
                 <p class="tw-text-red-500 tw-text-sm tw-mt-1">{{ $message }}</p>
@@ -56,7 +56,7 @@
 
         {{-- Description --}}
         <div class="tw-mb-4">
-            <label class="tw-block tw-mb-2">Description</label>
+            <label class="tw-block tw-mb-2">Deskripsi</label>
             <textarea name="description" class="tw-w-full tw-border tw-p-2 tw-rounded @error('description') tw-border-red-500 @enderror" rows="3">{{ old('description') }}</textarea>
             @error('description')
                 <p class="tw-text-red-500 tw-text-sm tw-mt-1">{{ $message }}</p>
@@ -65,21 +65,21 @@
 
         {{-- Requirement --}}
         <div class="tw-mb-4">
-            <label class="tw-block tw-mb-2">Requirement</label>
+            <label class="tw-block tw-mb-2">Persyaratan</label>
             <textarea name="requirement" class="tw-w-full tw-border tw-p-2 tw-rounded @error('requirement') tw-border-red-500 @enderror" rows="3">{{ old('requirement') }}</textarea>
             @error('requirement')
                 <p class="tw-text-red-500 tw-text-sm tw-mt-1">{{ $message }}</p>
             @enderror
         </div>
 
-        {{-- Benefit --}}
+        <!-- {{-- Benefit --}}
         <div class="tw-mb-4">
             <label class="tw-block tw-mb-2">Benefit</label>
             <textarea name="benefit" class="tw-w-full tw-border tw-p-2 tw-rounded @error('benefit') tw-border-red-500 @enderror" rows="3">{{ old('benefit') }}</textarea>
             @error('benefit')
                 <p class="tw-text-red-500 tw-text-sm tw-mt-1">{{ $message }}</p>
             @enderror
-        </div>
+        </div> -->
 
         {{-- Durasi --}}
         <div class="tw-mb-4">
@@ -92,7 +92,7 @@
 
         <div class="tw-text-end">
             <button type="submit" class="tw-bg-red-600 tw-text-white tw-px-4 tw-py-2 tw-rounded hover:tw-bg-red-700">
-                Simpan Vacancy
+                Simpan Lowongan
             </button>
         </div>
     </form>

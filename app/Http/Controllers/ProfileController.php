@@ -22,6 +22,7 @@ class ProfileController extends Controller
         }
 
         return view('pages.profile.index', compact('user'));
+        // return response()->json(compact('user'));
     }
     /**
      * Display the user's profile form.

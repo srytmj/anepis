@@ -43,7 +43,7 @@
         <div class="tw-mb-4">
             <label class="tw-block tw-font-semibold tw-mb-2">Lecturers</label>
 
-            <input type="text" id="lecturerSearch" placeholder="Search lecturers..."
+            <input type="text" id="lecturerSearch" placeholder="Cari dosen..."
                 class="tw-w-full tw-border tw-p-2 tw-rounded tw-mb-2">
 
             <div id="lecturerResults"
@@ -76,9 +76,9 @@
                     <div class="tw-border tw-rounded tw-bg-gray-100 tw-p-3 tw-mb-3 schedule-item">
 
                         <div class="tw-flex tw-justify-between tw-items-center tw-mb-2">
-                            <strong>Schedule</strong>
+                            <strong>Jadwal</strong>
                             <button type="button" class="removeScheduleBtn tw-bg-red-500 tw-text-white tw-text-xs tw-px-2 tw-py-1 tw-rounded hover:tw-bg-red-600">
-                                Remove
+                                Hapus
                             </button>
                         </div>
 
@@ -108,7 +108,7 @@
 
             <button type="button" id="addScheduleBtn"
                 class="tw-bg-transparent tw-border tw-border-blue-500 tw-text-blue-500 tw-px-3 tw-py-1 tw-rounded hover:tw-bg-blue-500 hover:tw-text-white tw-text-sm tw-mt-2">
-                + Add Schedule
+                + Tambah jadwal
             </button>
         </div>
 
@@ -117,7 +117,7 @@
             <div class="tw-border tw-rounded tw-bg-gray-100 tw-p-3 tw-mb-3 schedule-item">
 
                 <div class="tw-flex tw-justify-between tw-items-center tw-mb-2">
-                    <strong>Schedule</strong>
+                    <strong>Jadwal</strong>
                     <button type="button" class="removeScheduleBtn tw-bg-red-500 tw-text-white tw-text-xs tw-px-2 tw-py-1 tw-rounded hover:tw-bg-red-600">
                         Remove
                     </button>

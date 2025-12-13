@@ -6,16 +6,20 @@ use Illuminate\Support\Facades\Schema;
 // import db facade
 use Illuminate\Support\Facades\DB;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('student', function (Blueprint $table) {
+            // 1. Ini Primary Key utama sistem (Auto Increment)
             $table->id();
-            $table->integer('studentid', 20)->unique();
+
+            // 2. Student ID (NIM) dibuat unique saja, JANGAN auto_increment
+            // Ganti jadi integer biasa dan tambahkan unique()
+            $table->integer('studentid')->unique();
+
             $table->string('email')->unique();
             $table->string('name');
             $table->string('transcript')->nullable();

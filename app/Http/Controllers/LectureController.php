@@ -6,6 +6,9 @@ use App\Models\lecture;
 use App\Http\Requests\StorelectureRequest;
 use App\Http\Requests\UpdatelectureRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ApplyVacancy;
+use App\Models\Student;
+use Illuminate\Support\Facades\Storage;
 
 class LectureController extends Controller
 {
@@ -49,7 +52,24 @@ class LectureController extends Controller
      */
     public function show(lecture $lecture)
     {
-        //
+        // 1. Ambil ID Dosen dari user yang login
+        $lectureId = Auth::user()->foreignid; // Asumsi kolom foreignid di users table
+
+        // 2. Query Pelamar
+        // Ambil lamaran DIMANA vacancy -> course -> diajar oleh dosen ini
+        $applicants = ApplyVacancy::whereHas('vacancy.course.lecturers', function ($q) use ($lectureId) {
+            $q->where('lecture.id', $lectureId);
+        })
+            ->with([
+                'student.schedules',        // Jadwal sibuk mahasiswa
+                'vacancy.course.schedules', // Jadwal mata kuliah asprak
+                'vacancy.course'            // Info matkul
+            ])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // return view('lecture.dashboard', compact('applicants'));
+        return response()->json($applicants);
     }
 
     /**
@@ -81,5 +101,31 @@ class LectureController extends Controller
     {
         $lecture->delete();
         return redirect()->route('lecture.index')->with('success', 'Dosen berhasil dihapus.');
+    }
+
+    public function previewTranscript($id)
+    {
+        // 1. Cari data mahasiswa berdasarkan ID
+        $student = Student::findOrFail($id);
+
+        // 2. Cek apakah kolom transcript ada isinya
+        if (!$student->transcript) {
+            abort(404, 'File transkrip tidak ditemukan di database.');
+        }
+
+        // 3. Dapatkan Full Path File
+        // Asumsi file tersimpan di disk 'public' (storage/app/public)
+        // $student->transcript isinya misal: "transcripts/NamaFileAcak.pdf"
+        $path = Storage::disk('public')->path($student->transcript);
+
+        // 4. Cek apakah file fisik benar-benar ada
+        if (!file_exists($path)) {
+            abort(404, 'File fisik tidak ditemukan di server.');
+        }
+
+        // 5. Return Response File (Ini kuncinya!)
+        // Laravel otomatis set header 'Content-Type: application/pdf'
+        // dan 'Content-Disposition: inline'
+        return response()->file($path);
     }
 }
