@@ -82,6 +82,8 @@
                             </button>
                         </div>
 
+                        <input type="hidden" name="schedule_id[]" value="{{ $sch->id }}">
+
                         <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-3">
                             <div>
                                 <label class="tw-block tw-text-sm tw-mb-1">Day</label>
